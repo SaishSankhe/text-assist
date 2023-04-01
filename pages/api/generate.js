@@ -74,7 +74,7 @@ export default async function (req, res) {
 }
 
 function generateUserPrompt(reqBody) {
-  const { prompt, tone, emoticon, language } = reqBody;
+  const { prompt, tone, emoticon, language, style } = reqBody;
 
   let generatedPrompt = `The prompt is - ${prompt}`;
 
@@ -88,6 +88,10 @@ function generateUserPrompt(reqBody) {
 
   if (language) {
     generatedPrompt = generatedPrompt + `, ${language} language`;
+  }
+
+  if (style) {
+    generatedPrompt = generatedPrompt + `, ${style} style of message`;
   }
 
   return `You must respond with only a JSON object of field "message" or "error".

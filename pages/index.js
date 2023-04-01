@@ -9,6 +9,8 @@ export default function Home() {
   const [result, setResult] = useState([]);
   const [tone, setTone] = useState('');
   const [language, setLanguage] = useState('english');
+  const [style, setStyle] = useState('casual');
+  const [length, setLength] = useState('');
   const [advanced, setAdvanced] = useState(false);
   const [emoticon, setEmoticon] = useState(false);
 
@@ -23,6 +25,7 @@ export default function Home() {
       body.tone = tone;
       body.emoticon = emoticon;
       body.language = language;
+      body.style = style;
     }
 
     try {
@@ -60,6 +63,10 @@ export default function Home() {
     setLanguage(event.target.value);
   };
 
+  const onStyleChange = (event) => {
+    setStyle(event.target.value);
+  };
+
   return (
     <div>
       <Head>
@@ -94,65 +101,87 @@ export default function Home() {
             Advanced filters
           </label>
 
-          <hr />
+          {advanced && (
+            <div>
+              <label htmlFor="tone">
+                Choose tone of the message
+                <br />
+                <select
+                  name="tone"
+                  id="tone"
+                  onClick={onToneChange}
+                  disabled={!advanced}
+                  defaultValue=""
+                >
+                  <option value="" disabled>
+                    -- Choose tone --
+                  </option>
+                  <option value="neutral">Neutral</option>
+                  <option value="happy">Happy</option>
+                  <option value="sad">Sad</option>
+                  <option value="funny">Funny</option>
+                  <option value="romantic">Romantic</option>
+                  <option value="regretful">Regretful</option>
+                  <option value="sarcastic">Sarcastic</option>
+                  <option value="celebratory">Celebratory</option>
+                  <option value="polite">Polite</option>
+                  <option value="respectfult">Respectful</option>
+                </select>
+              </label>
 
-          <label htmlFor="tone">
-            Choose tone of the message
-            <br />
-            <select
-              name="tone"
-              id="tone"
-              onClick={onToneChange}
-              disabled={!advanced}
-              defaultValue=""
-            >
-              <option value="" disabled>
-                -- Choose tone --
-              </option>
-              <option value="neutral">Neutral</option>
-              <option value="happy">Happy</option>
-              <option value="sad">Sad</option>
-              <option value="funny">Funny</option>
-              <option value="romantic">Romantic</option>
-              <option value="regretful">Regretful</option>
-              <option value="sarcastic">Sarcastic</option>
-              <option value="celebratory">Celebratory</option>
-            </select>
-          </label>
+              <hr />
 
-          <hr />
+              <label htmlFor="emoticon">
+                <input
+                  type="checkbox"
+                  name="emoticon"
+                  id="emoticon"
+                  checked={emoticon}
+                  onChange={() => setEmoticon(!emoticon)}
+                  disabled={!advanced}
+                />
+                Include emojis
+              </label>
 
-          <label htmlFor="emoticon">
-            <input
-              type="checkbox"
-              name="emoticon"
-              id="emoticon"
-              checked={emoticon}
-              onChange={() => setEmoticon(!emoticon)}
-              disabled={!advanced}
-            />
-            Include emojis
-          </label>
+              <hr />
 
-          <hr />
+              <label htmlFor="language">
+                Choose language of the message
+                <br />
+                <select
+                  name="language"
+                  id="language"
+                  onClick={onLanguageChange}
+                  disabled={!advanced}
+                  defaultValue="english"
+                >
+                  <option value="english">English</option>
+                  <option value="hindi">हिंदी</option>
+                  <option value="marathi">मराठी</option>
+                </select>
+              </label>
 
-          <label htmlFor="language">
-            Choose language of the message
-            <br />
-            <select
-              name="language"
-              id="language"
-              onClick={onLanguageChange}
-              disabled={!advanced}
-              defaultValue="english"
-            >
-              <option value="english">English</option>
-              <option value="hindi">हिंदी</option>
-              <option value="marathi">मराठी</option>
-            </select>
-          </label>
+              <hr />
 
-          <hr />
+              <label htmlFor="style">
+                Choose style of the message
+                <br />
+                <select
+                  name="style"
+                  id="style"
+                  onClick={onStyleChange}
+                  disabled={!advanced}
+                  defaultValue="casual"
+                >
+                  <option value="casual">Casual</option>
+                  <option value="semi-formal">Semi-formal</option>
+                  <option value="formal">Formal</option>
+                </select>
+              </label>
+
+              <hr />
+            </div>
+          )}
 
           <input
             type="submit"
