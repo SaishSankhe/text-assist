@@ -2,6 +2,9 @@ import Head from 'next/head';
 import { useState } from 'react';
 import styles from './index.module.css';
 import CopyToClipboard from '@/components/CopyToClipboard';
+import { Montserrat } from 'next/font/google';
+
+const montserrat = Montserrat({ subsets: ['latin'] });
 
 export default function Home() {
   const [prompt, setPrompt] = useState('');
@@ -10,7 +13,6 @@ export default function Home() {
   const [tone, setTone] = useState('');
   const [language, setLanguage] = useState('english');
   const [style, setStyle] = useState('casual');
-  const [length, setLength] = useState('');
   const [advanced, setAdvanced] = useState(false);
   const [emoticon, setEmoticon] = useState(false);
 
@@ -73,8 +75,8 @@ export default function Home() {
         <title>Text generator</title>
       </Head>
 
-      <main className={styles.main}>
-        <h3>Text generator</h3>
+      <main className={montserrat.className}>
+        <h3>Text Assist</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
@@ -98,7 +100,7 @@ export default function Home() {
               checked={advanced}
               onChange={() => setAdvanced(!advanced)}
             />
-            Advanced filters
+            Advanced options
           </label>
 
           {advanced && (
@@ -195,6 +197,7 @@ export default function Home() {
           />
         </form>
         <div className={styles.result}>{result.message}</div>
+        <div className={styles.result}>{result.error}</div>
         {result.message && <CopyToClipboard copyText={result.message} />}
       </main>
     </div>
