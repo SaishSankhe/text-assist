@@ -76,29 +76,17 @@ export default async function (req, res) {
 function generateUserPrompt(reqBody) {
   const { prompt, tone, emoticon, language, style, length } = reqBody;
 
-  let generatedPrompt = `Using your talent, craft a message for the user, which says - "${prompt}"
-  It should be a ${length} message.`;
-
-  if (tone) {
-    generatedPrompt = `${generatedPrompt}.
-    The tone of the message should be "${tone}"`;
-  }
+  let createdPrompt = `You must respond with only a JSON object of field "message" or "error".
+  Using your talent, craft a message for the user, which says - "${prompt}"
+  It should be a ${length} message.
+  The tone of the message should be "${tone}".
+  The language of the output message should be "${language}".
+  The style of the message should be "${style}".`;
 
   if (emoticon) {
-    generatedPrompt = `${generatedPrompt}.
+    createdPrompt = `${createdPrompt}.
     The message should include emojis.`;
   }
 
-  if (language) {
-    generatedPrompt = `${generatedPrompt}.
-    The language of the output message should be "${language}"`;
-  }
-
-  if (style) {
-    generatedPrompt = `${generatedPrompt}.
-    The style of the message should be "${style}"`;
-  }
-
-  return `You must respond with only a JSON object of field "message" or "error".
-  ${generatedPrompt}`;
+  return createdPrompt;
 }

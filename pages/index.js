@@ -118,7 +118,6 @@ export default function Home() {
       <main className={montserrat.className}>
         <section className="p-4 flex flex-col">
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
-
           <div className="content flex flex-col min-h-full h-full flex-1 justify-between">
             <div className="message-container">
               {isResult ? (
@@ -136,8 +135,8 @@ export default function Home() {
               )}
             </div>
 
-            <div className="form-container">
-              <FullWidthButton type="default" onClick={openDrawer}>
+            <div className="form-container fixed bottom-0 w-full left-0 right-0 px-4">
+              <FullWidthButton type="default" onClick={openDrawer} size="large">
                 Advanced options
               </FullWidthButton>
 
@@ -225,6 +224,7 @@ export default function Home() {
                     type="text"
                     onChange={(e) => setPrompt(e.target.value)}
                     maxLength={128}
+                    size="large"
                     suffix={
                       <CloseCircleOutlined
                         className={
@@ -239,13 +239,14 @@ export default function Home() {
                   />
                 </Form.Item>
 
-                <Form.Item>
+                <Form.Item className="mb-0">
                   <FullWidthButton
                     type="default"
                     htmlType="submit"
                     loading={loading}
                     disabled={loading}
                     icon={<BulbOutlined />}
+                    size="large"
                   >
                     {loading ? 'Generating...' : 'Generate'}
                   </FullWidthButton>
