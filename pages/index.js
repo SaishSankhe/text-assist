@@ -217,7 +217,7 @@ export default function Home() {
                 </Form>
               </Drawer>
 
-              <div className="form-card p-6 my-4">
+              <div className="form-card p-6 my-6">
                 <Form
                   form={form}
                   name="form"
@@ -279,8 +279,8 @@ export default function Home() {
 
 const CustomInput = styled(Input)`
   border: none;
-  font-size: 0.75rem;
-  height: 2.75rem;
+  font-size: 1rem;
+  height: 3.25rem;
   border: 1px solid #eaeaea;
 `;
 
@@ -291,9 +291,9 @@ const FullWidthButton = styled(Button)`
   justify-content: center;
 
   &.ant-btn-default {
-    font-size: 0.75rem;
+    font-size: 1rem;
     border-radius: 0.5rem;
-    height: 2.75rem;
+    height: 3.25rem;
     background-color: #282828;
     color: #ffffff;
     border: none;
@@ -307,5 +307,6 @@ const FullWidthButtonSpaceBetween = styled(FullWidthButton)`
     border-radius: 5rem;
     background-color: #f9f9f9;
     color: #282828;
+    padding: 0 24px;
   }
 `;
