@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+import { Button } from 'antd';
+import { CopyOutlined } from '@ant-design/icons';
+
 export default function CopyToClipboard({ copyText }) {
   const [isCopied, setIsCopied] = useState(false);
 
@@ -25,8 +28,8 @@ export default function CopyToClipboard({ copyText }) {
   };
 
   return (
-    <button className="copy-btn" onClick={handleCopyClick}>
-      {isCopied ? 'Copied!' : 'Copy message'}
-    </button>
+    <Button type="default" onClick={handleCopyClick} icon={<CopyOutlined />}>
+      {isCopied ? 'Copied!' : 'Copy'}
+    </Button>
   );
 }
