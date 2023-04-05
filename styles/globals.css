@@ -13,3 +13,12 @@
 section {
   min-height: 100%;
 }
+
+.form-card {
+  background-color: #f9f9f9;
+  border-radius: 2rem;
+}
+
+.ant-form-item-explain-error {
+  font-size: 0.75rem;
+}

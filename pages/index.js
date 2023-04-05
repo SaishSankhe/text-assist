@@ -5,7 +5,12 @@ import CopyToClipboard from '@/components/CopyToClipboard';
 import { Montserrat } from 'next/font/google';
 
 import { Button, Checkbox, Form, Input, Drawer, Select, Radio } from 'antd';
-import { CloseCircleOutlined, BulbOutlined } from '@ant-design/icons';
+import {
+  CloseCircleOutlined,
+  BulbOutlined,
+  PlusCircleOutlined,
+  BulbFilled,
+} from '@ant-design/icons';
 import styled from 'styled-components';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
@@ -135,10 +140,15 @@ export default function Home() {
               )}
             </div>
 
-            <div className="form-container fixed bottom-0 w-full left-0 right-0 px-4">
-              <FullWidthButton type="default" onClick={openDrawer} size="large">
+            <div className="fixed-container-bottom fixed bottom-0 w-full left-0 right-0 px-4">
+              <FullWidthButtonSpaceBetween
+                type="default"
+                onClick={openDrawer}
+                size="large"
+              >
                 Advanced options
-              </FullWidthButton>
+                <PlusCircleOutlined />
+              </FullWidthButtonSpaceBetween>
 
               <Drawer
                 title="Advanced options"
@@ -207,51 +217,58 @@ export default function Home() {
                 </Form>
               </Drawer>
 
-              <Form
-                form={form}
-                name="form"
-                initialValues={{ remember: true }}
-                onFinish={onSubmit}
-                autoComplete="off"
-              >
-                <Form.Item
-                  name="prompt"
-                  rules={[{ required: true, message: 'Please enter a prompt' }]}
+              <div className="form-card p-6 mb-4">
+                <Form
+                  form={form}
+                  name="form"
+                  initialValues={{ remember: true }}
+                  onFinish={onSubmit}
+                  autoComplete="off"
                 >
-                  <Input
-                    placeholder="Generate message about..."
-                    value={prompt}
-                    type="text"
-                    onChange={(e) => setPrompt(e.target.value)}
-                    maxLength={128}
-                    size="large"
-                    suffix={
-                      <CloseCircleOutlined
-                        className={
-                          prompt.length === 0 ? 'icon-hidden' : 'icon-show'
-                        }
-                        onClick={() => {
-                          setPrompt('');
-                          form.resetFields(['prompt']);
-                        }}
-                      />
-                    }
-                  />
-                </Form.Item>
-
-                <Form.Item className="mb-0">
-                  <FullWidthButton
-                    type="default"
-                    htmlType="submit"
-                    loading={loading}
-                    disabled={loading}
-                    icon={<BulbOutlined />}
-                    size="large"
+                  <Form.Item
+                    name="prompt"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please enter atleat 1 word as a prompt',
+                      },
+                    ]}
                   >
-                    {loading ? 'Generating...' : 'Generate'}
-                  </FullWidthButton>
-                </Form.Item>
-              </Form>
+                    <CustomInput
+                      placeholder="Generate message about..."
+                      value={prompt}
+                      type="text"
+                      onChange={(e) => setPrompt(e.target.value)}
+                      maxLength={128}
+                      size="large"
+                      suffix={
+                        <CloseCircleOutlined
+                          className={
+                            prompt.length === 0 ? 'icon-hidden' : 'icon-show'
+                          }
+                          onClick={() => {
+                            setPrompt('');
+                            form.resetFields(['prompt']);
+                          }}
+                        />
+                      }
+                    />
+                  </Form.Item>
+
+                  <Form.Item className="mb-0">
+                    <FullWidthButton
+                      type="default"
+                      htmlType="submit"
+                      loading={loading}
+                      disabled={loading}
+                      size="large"
+                    >
+                      {loading ? 'Generating' : 'Generate'}
+                      {loading ? <BulbFilled /> : <BulbOutlined />}
+                    </FullWidthButton>
+                  </Form.Item>
+                </Form>
+              </div>
             </div>
           </div>
         </section>
@@ -260,7 +277,28 @@ export default function Home() {
   );
 }
 
+const CustomInput = styled(Input)`
+  border: none;
+  font-size: 0.75rem;
+  height: 2.75rem;
+`;
+
 const FullWidthButton = styled(Button)`
   min-width: 100%;
-  margin-bottom: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &.ant-btn-default {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    height: 2.75rem;
+    background-color: #282828;
+    color: #ffffff;
+    border: none;
+  }
+`;
+
+const FullWidthButtonSpaceBetween = styled(FullWidthButton)`
+  justify-content: space-between;
 `;
