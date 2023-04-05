@@ -115,7 +115,7 @@ export default function Home() {
       </Head>
 
       <main className={montserrat.className}>
-        <section className="p-4 flex flex-col min-h-screen">
+        <section className="p-4 flex flex-col">
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
 
           <div className="content flex flex-col min-h-full h-full flex-1 justify-between">

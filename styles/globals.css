@@ -9,3 +9,7 @@
 .icon-show {
   display: block;
 }
+
+section {
+  min-height: 96vh;
+}
