@@ -16,14 +16,14 @@ export default async function (req, res) {
     return;
   }
 
-  const systemContent = `You are very talented, extremely articulated and an eloquent writer. You specialize in writing short texts for special occasions such as birthdays, festivals, special days, etc.
-                        You can write the text in any tone, be it happy, sad, witty, romantic, etc. You must write the text message in under 800 characters for the requested prompt.
-                        You must only and only respond with the generated message. If the message is not in English language, it is fine and you must not provide its translation in any language.
-                        You must convert your plain-text response to a JSON object with field - 
-                        "message": string with the message
-                        If you cannot generate the message for requested prompt, tone or language, you must respond with an error message.
-                        You must convert the plain-text error message response to a JSON object with field - 
-                        "error": string with the error message`;
+  const systemContent = `You are very talented, extremely articulated and an eloquent writer. You specialize in writing day-to-day text messages for humans. Humans will come to you with a word or sentence, and they want you to craft a message based on their requirements.
+  Your goal is to craft a message based on the user entered prompt. You must not reply to the prompt, but you must generate a message which conveys the same meaning as the prompt.
+  You must only and only respond with the generated message. If the message is not in English language, it is fine and you must not provide its translation in any language.
+  You must convert your plain-text response to a JSON object with field - 
+  "message": string with the message
+  If you cannot generate the message for requested prompt, tone or language, you must respond with an error message.
+  You must convert the plain-text error message response to a JSON object with field - 
+  "error": string with the error message`;
 
   const body = {
     model: 'gpt-3.5-turbo',
@@ -74,26 +74,31 @@ export default async function (req, res) {
 }
 
 function generateUserPrompt(reqBody) {
-  const { prompt, tone, emoticon, language, style } = reqBody;
+  const { prompt, tone, emoticon, language, style, length } = reqBody;
 
-  let generatedPrompt = `The prompt is - ${prompt}`;
+  let generatedPrompt = `Using your talent, craft a message for the user, which says - "${prompt}"
+  It should be a ${length} message.`;
 
   if (tone) {
-    generatedPrompt = generatedPrompt + `, ${tone} tone`;
+    generatedPrompt = `${generatedPrompt}.
+    The tone of the message should be "${tone}"`;
   }
 
   if (emoticon) {
-    generatedPrompt = generatedPrompt + ', include emoticons';
+    generatedPrompt = `${generatedPrompt}.
+    The message should include emojis.`;
   }
 
   if (language) {
-    generatedPrompt = generatedPrompt + `, ${language} language`;
+    generatedPrompt = `${generatedPrompt}.
+    The language of the output message should be "${language}"`;
   }
 
   if (style) {
-    generatedPrompt = generatedPrompt + `, ${style} style of message`;
+    generatedPrompt = `${generatedPrompt}.
+    The style of the message should be "${style}"`;
   }
 
   return `You must respond with only a JSON object of field "message" or "error".
-          ${generatedPrompt}`;
+  ${generatedPrompt}`;
 }

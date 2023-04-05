@@ -18,12 +18,21 @@ export default function Home() {
   const [language, setLanguage] = useState('english');
   const [style, setStyle] = useState('casual');
   const [emoticon, setEmoticon] = useState(false);
+  const [length, setLength] = useState('normal');
 
   // drawer
   const [open, setOpen] = useState(false);
 
   // form
   const [form] = Form.useForm();
+
+  const openDrawer = () => {
+    setOpen(true);
+  };
+
+  const closeDrawer = () => {
+    setOpen(false);
+  };
 
   const languageOptions = [
     { value: 'english', label: 'English' },
@@ -37,6 +46,12 @@ export default function Home() {
     { value: 'formal', label: 'Formal' },
   ];
 
+  const lengthOptions = [
+    { value: 'short', label: 'Short' },
+    { value: 'normal', label: 'Normal' },
+    { value: 'long', label: 'Long' },
+  ];
+
   async function onSubmit(values) {
     const { prompt } = values;
 
@@ -46,6 +61,7 @@ export default function Home() {
       emoticon,
       language,
       style,
+      length,
     };
 
     try {
@@ -88,6 +104,10 @@ export default function Home() {
     setStyle(value);
   };
 
+  const onLengthChange = ({ target: { value } }) => {
+    setLength(value);
+  };
+
   return (
     <>
       <Head>
@@ -116,7 +136,7 @@ export default function Home() {
             </div>
 
             <div className="form-container">
-              <Button type="default" onClick={() => setOpen(true)}>
+              <Button type="default" onClick={openDrawer}>
                 Advanced options
               </Button>
 
@@ -124,10 +144,14 @@ export default function Home() {
                 title="Advanced options"
                 placement="bottom"
                 closeIcon={<CloseCircleOutlined />}
-                onClose={() => setOpen(false)}
+                onClose={closeDrawer}
                 open={open}
                 keyboard={true}
-                footer={<Button type="default">Apply</Button>}
+                footer={
+                  <Button type="default" onClick={closeDrawer}>
+                    Apply
+                  </Button>
+                }
                 height={'auto'}
               >
                 <Form layout="vertical" form={form}>
@@ -149,6 +173,7 @@ export default function Home() {
                       ]}
                     />
                   </Form.Item>
+
                   <Form.Item label="Message language">
                     <Radio.Group
                       options={languageOptions}
@@ -157,6 +182,7 @@ export default function Home() {
                       optionType="button"
                     />
                   </Form.Item>
+
                   <Form.Item label="Message style">
                     <Radio.Group
                       options={styleOptions}
@@ -165,11 +191,22 @@ export default function Home() {
                       optionType="button"
                     />
                   </Form.Item>
+
+                  <Form.Item label="Message length">
+                    <Radio.Group
+                      options={lengthOptions}
+                      onChange={onLengthChange}
+                      value={length}
+                      optionType="button"
+                    />
+                  </Form.Item>
+
                   <Checkbox onChange={() => setEmoticon(true)}>
                     Include emojis
                   </Checkbox>
                 </Form>
               </Drawer>
+
               <Form
                 form={form}
                 name="form"
