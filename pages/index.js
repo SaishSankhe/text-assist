@@ -6,6 +6,7 @@ import { Montserrat } from 'next/font/google';
 
 import { Button, Checkbox, Form, Input, Drawer, Select, Radio } from 'antd';
 import { CloseCircleOutlined, BulbOutlined } from '@ant-design/icons';
+import styled from 'styled-components';
 
 const montserrat = Montserrat({ subsets: ['latin'] });
 
@@ -136,9 +137,9 @@ export default function Home() {
             </div>
 
             <div className="form-container">
-              <Button type="default" onClick={openDrawer}>
+              <FullWidthButton type="default" onClick={openDrawer}>
                 Advanced options
-              </Button>
+              </FullWidthButton>
 
               <Drawer
                 title="Advanced options"
@@ -239,7 +240,7 @@ export default function Home() {
                 </Form.Item>
 
                 <Form.Item>
-                  <Button
+                  <FullWidthButton
                     type="default"
                     htmlType="submit"
                     loading={loading}
@@ -247,7 +248,7 @@ export default function Home() {
                     icon={<BulbOutlined />}
                   >
                     {loading ? 'Generating...' : 'Generate'}
-                  </Button>
+                  </FullWidthButton>
                 </Form.Item>
               </Form>
             </div>
@@ -257,3 +258,8 @@ export default function Home() {
     </>
   );
 }
+
+const FullWidthButton = styled(Button)`
+  min-width: 100%;
+  margin-bottom: 24px;
+`;
