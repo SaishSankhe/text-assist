@@ -22,3 +22,7 @@ section {
 .ant-form-item-explain-error {
   font-size: 0.75rem;
 }
+
+.ant-drawer-content-wrapper {
+  box-shadow: none !important;
+}

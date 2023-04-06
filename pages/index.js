@@ -122,7 +122,7 @@ export default function Home() {
       <main className={montserrat.className}>
         <section className="p-4 flex flex-col">
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
-          <div className="content flex flex-col flex-1 justify-center">
+          <div className="message-container flex flex-col flex-1 justify-center">
             {isResult ? (
               <MessageCardDiv className="message-container p-6">
                 {result.message}
@@ -150,7 +150,7 @@ export default function Home() {
               <PlusCircleOutlined />
             </FullWidthButtonSpaceBetween>
 
-            <Drawer
+            <CustomDrawer
               title="Advanced options"
               placement="bottom"
               closeIcon={<CloseCircleOutlined />}
@@ -163,6 +163,7 @@ export default function Home() {
                 </Button>
               }
               height={'auto'}
+              className="mb-6 mx-6 p-6"
             >
               <Form layout="vertical" form={form}>
                 <Form.Item label="Tone of the message">
@@ -215,7 +216,7 @@ export default function Home() {
                   Include emojis
                 </Checkbox>
               </Form>
-            </Drawer>
+            </CustomDrawer>
 
             <div className="form-card p-6 my-6 w-full">
               <Form
@@ -320,5 +321,13 @@ const FullWidthButtonSpaceBetween = styled(FullWidthButton)`
     background-color: #f9f9f9;
     color: #282828;
     padding: 0 24px;
+  }
+`;
+
+const CustomDrawer = styled(Drawer)`
+  border-radius: 2rem;
+
+  &.ant-drawer-content {
+    width: auto;
   }
 `;
