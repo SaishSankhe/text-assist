@@ -95,6 +95,7 @@ export default function Home() {
 
       if (response.status !== 200) {
         setLoading(false);
+        setIsError(true);
         throw (
           data.error ||
           new Error(`Request failed with status ${response.status}`)
