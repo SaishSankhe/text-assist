@@ -4,7 +4,16 @@ import CopyToClipboard from '@/components/CopyToClipboard';
 import styled from 'styled-components';
 import { Montserrat } from 'next/font/google';
 
-import { Button, Checkbox, Form, Input, Drawer, Select, Radio } from 'antd';
+import {
+  Button,
+  Checkbox,
+  Form,
+  Input,
+  Drawer,
+  Select,
+  Radio,
+  Skeleton,
+} from 'antd';
 import {
   CloseCircleOutlined,
   BulbOutlined,
@@ -71,6 +80,8 @@ export default function Home() {
 
     try {
       setLoading(true);
+      setIsResult(false);
+
       const response = await fetch('/api/generate', {
         method: 'POST',
         headers: {
@@ -94,6 +105,8 @@ export default function Home() {
       setLoading(false);
     } catch (error) {
       alert(error.message);
+      setIsResult(false);
+      setLoading(false);
     }
   }
 
@@ -120,13 +133,17 @@ export default function Home() {
       </Head>
 
       <main className={montserrat.className}>
-        <section className="p-4 flex flex-col">
+        <section className="p-4 flex flex-col overflow-scroll">
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
           <div className="message-container flex flex-col flex-1 justify-center">
             {isResult ? (
               <MessageCardDiv className="message-container p-6">
                 {result.message}
                 {result.error}
+              </MessageCardDiv>
+            ) : loading ? (
+              <MessageCardDiv className="message-container p-6">
+                <Skeleton active={loading} title={false} />
               </MessageCardDiv>
             ) : (
               <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">

@@ -32,7 +32,7 @@ export default function CopyToClipboard({ copyText }) {
     <CopyButton
       type="default"
       onClick={handleCopyClick}
-      className="mb-10 px-6 w-8/12"
+      className="mb-6 px-6 w-8/12"
     >
       {isCopied ? 'Ready to paste!' : 'Copy message'}
       {isCopied ? <CopyFilled /> : <CopyOutlined />}
