@@ -82,6 +82,7 @@ export default function Home() {
     try {
       setLoading(true);
       setIsResult(false);
+      setIsError(false);
 
       const response = await fetch('/api/generate', {
         method: 'POST',
@@ -96,6 +97,8 @@ export default function Home() {
       if (response.status !== 200) {
         setLoading(false);
         setIsError(true);
+        setIsResult(false);
+
         throw (
           data.error ||
           new Error(`Request failed with status ${response.status}`)
