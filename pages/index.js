@@ -144,19 +144,17 @@ export default function Home() {
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
           <div className="message-container flex flex-col flex-1 justify-center">
             {isResult ? (
-              isError ? (
-                <ErrorMessageCardDiv className="message-container p-6">
-                  "Apologies! Something went wrong. Please try once again."
-                </ErrorMessageCardDiv>
-              ) : (
-                <MessageCardDiv className="message-container p-6">
-                  {result.message}
-                </MessageCardDiv>
-              )
+              <MessageCardDiv className="message-container p-6">
+                {result.message}
+              </MessageCardDiv>
             ) : loading ? (
               <MessageCardDiv className="message-container p-6">
                 <Skeleton active={loading} title={false} />
               </MessageCardDiv>
+            ) : isError ? (
+              <ErrorMessageCardDiv className="message-container p-6">
+                "Apologies! Something went wrong. Please try once again."
+              </ErrorMessageCardDiv>
             ) : (
               <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">
                 No message genereated yet.
