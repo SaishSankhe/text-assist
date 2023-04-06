@@ -28,6 +28,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState([]);
   const [isResult, setIsResult] = useState(false);
+  const [isError, setIsError] = useState(false);
   const [tone, setTone] = useState('normal');
   const [language, setLanguage] = useState('english');
   const [style, setStyle] = useState('casual');
@@ -101,10 +102,12 @@ export default function Home() {
       }
 
       setResult(data.result);
+      if (data.result.error) setIsError(true);
+
       setIsResult(true);
       setLoading(false);
     } catch (error) {
-      alert(error.message);
+      setIsError(true);
       setIsResult(false);
       setLoading(false);
     }
@@ -137,10 +140,15 @@ export default function Home() {
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
           <div className="message-container flex flex-col flex-1 justify-center">
             {isResult ? (
-              <MessageCardDiv className="message-container p-6">
-                {result.message}
-                {result.error}
-              </MessageCardDiv>
+              isError ? (
+                <ErrorMessageCardDiv className="message-container p-6">
+                  "Apologies! Something went wrong. Please try once again."
+                </ErrorMessageCardDiv>
+              ) : (
+                <MessageCardDiv className="message-container p-6">
+                  {result.message}
+                </MessageCardDiv>
+              )
             ) : loading ? (
               <MessageCardDiv className="message-container p-6">
                 <Skeleton active={loading} title={false} />
@@ -303,6 +311,10 @@ const NoMessageCardDiv = styled.div`
   color: #979797;
   border: dashed 3.5px #efefef;
   border-radius: 2rem 2rem 0.1rem;
+`;
+
+const ErrorMessageCardDiv = styled(NoMessageCardDiv)`
+  border: dashed 3.5px red;
 `;
 
 const CustomInput = styled(Input)`
