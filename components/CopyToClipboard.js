@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
+import styled from 'styled-components';
 import { Button } from 'antd';
-import { CopyOutlined } from '@ant-design/icons';
+import { CopyOutlined, CopyFilled } from '@ant-design/icons';
 
 export default function CopyToClipboard({ copyText }) {
   const [isCopied, setIsCopied] = useState(false);
@@ -28,8 +29,30 @@ export default function CopyToClipboard({ copyText }) {
   };
 
   return (
-    <Button type="default" onClick={handleCopyClick} icon={<CopyOutlined />}>
-      {isCopied ? 'Copied!' : 'Copy'}
-    </Button>
+    <CopyButton
+      type="default"
+      onClick={handleCopyClick}
+      className="mb-10 px-6 w-8/12"
+    >
+      {isCopied ? 'Ready to paste!' : 'Copy message'}
+      {isCopied ? <CopyFilled /> : <CopyOutlined />}
+    </CopyButton>
   );
 }
+
+const CopyButton = styled(Button)`
+  border: none;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &.ant-btn-default {
+    font-size: 1rem;
+    border-radius: 5rem;
+    height: 3.25rem;
+    background-color: #282828;
+    color: #ffffff;
+    border: none;
+  }
+`;
