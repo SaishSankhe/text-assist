@@ -27,3 +27,8 @@ section {
 .ant-drawer-content-wrapper {
   box-shadow: none !important;
 }
+
+.ant-drawer-footer {
+  display: flex;
+  justify-content: end;
+}

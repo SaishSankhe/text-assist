@@ -153,7 +153,7 @@ export default function Home() {
               </MessageCardDiv>
             ) : isError ? (
               <ErrorMessageCardDiv className="message-container p-6">
-                "Apologies! Something went wrong. Please try once again."
+                Apologies! Something went wrong. Please try once again.
               </ErrorMessageCardDiv>
             ) : (
               <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">
@@ -185,16 +185,17 @@ export default function Home() {
               open={open}
               keyboard={true}
               footer={
-                <Button type="default" onClick={closeDrawer}>
+                <Button type="default" size="large" onClick={closeDrawer}>
                   Apply
                 </Button>
               }
               height={'auto'}
-              className="mb-6 mx-6 p-6"
+              className="mb-6 mx-6 pb-4"
             >
               <Form layout="vertical" form={form}>
                 <Form.Item label="Tone of the message">
                   <Select
+                    size="large"
                     defaultValue="Normal"
                     onChange={onToneChange}
                     options={[
@@ -214,6 +215,7 @@ export default function Home() {
 
                 <Form.Item label="Message language">
                   <Radio.Group
+                    size="large"
                     options={languageOptions}
                     onChange={onLanguageChange}
                     value={language}
@@ -223,6 +225,7 @@ export default function Home() {
 
                 <Form.Item label="Message style">
                   <Radio.Group
+                    size="large"
                     options={styleOptions}
                     onChange={onStyleChange}
                     value={style}
@@ -232,6 +235,7 @@ export default function Home() {
 
                 <Form.Item label="Message length">
                   <Radio.Group
+                    size="large"
                     options={lengthOptions}
                     onChange={onLengthChange}
                     value={length}
@@ -239,9 +243,9 @@ export default function Home() {
                   />
                 </Form.Item>
 
-                <Checkbox onChange={() => setEmoticon(true)}>
+                <LargerFontCheckbox onChange={() => setEmoticon(true)}>
                   Include emojis
-                </Checkbox>
+                </LargerFontCheckbox>
               </Form>
             </CustomDrawer>
 
@@ -316,7 +320,7 @@ const NoMessageCardDiv = styled.div`
 `;
 
 const ErrorMessageCardDiv = styled(NoMessageCardDiv)`
-  border: dashed 3.5px red;
+  border: dotted 3.5px red;
 `;
 
 const CustomInput = styled(Input)`
@@ -361,4 +365,8 @@ const CustomDrawer = styled(Drawer)`
   &.ant-drawer-content {
     width: auto;
   }
+`;
+
+const LargerFontCheckbox = styled(Checkbox)`
+  font-size: 1rem !important;
 `;
