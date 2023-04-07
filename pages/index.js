@@ -191,27 +191,6 @@ export default function Home() {
               className="mb-4 mx-4 pb-4"
             >
               <Form layout="vertical">
-                <Form.Item label="Tone of the message">
-                  <Select
-                    size="large"
-                    defaultValue="Normal"
-                    onChange={onToneChange}
-                    options={[
-                      { value: 'normal', label: 'Normal' },
-                      { value: 'happy', label: 'Happy' },
-                      { value: 'sad', label: 'Sad' },
-                      { value: 'funny', label: 'Funny' },
-                      { value: 'romantic', label: 'Romantic' },
-                      { value: 'regretful', label: 'Regretful' },
-                      { value: 'sarcastic', label: 'Sarcastic' },
-                      { value: 'celebratory', label: 'Celebratory' },
-                      { value: 'polite', label: 'Polite' },
-                      { value: 'respectful', label: 'Respectful' },
-                      { value: 'motivational', label: 'Motivational' },
-                    ]}
-                  />
-                </Form.Item>
-
                 <Form.Item label="Message language">
                   <Radio.Group
                     size="large"
@@ -292,6 +271,7 @@ export default function Home() {
                 <InputAttachedOptions className="p-4 mb-4">
                   <Form.Item label="Tone of the message" className="mb-4">
                     <Select
+                      size="large"
                       defaultValue="Normal"
                       onChange={onToneChange}
                       options={[
@@ -310,7 +290,11 @@ export default function Home() {
                     />
                   </Form.Item>
 
-                  <SmallButtonSpaceBetween type="default" onClick={openDrawer}>
+                  <SmallButtonSpaceBetween
+                    size="large"
+                    type="default"
+                    onClick={openDrawer}
+                  >
                     More options
                     <PlusCircleOutlined />
                   </SmallButtonSpaceBetween>
