@@ -32,7 +32,7 @@ export default function CopyToClipboard({ copyText }) {
     <CopyButton
       type="default"
       onClick={handleCopyClick}
-      className="mb-6 px-6 w-8/12"
+      className="mb-4 px-6 w-8/12"
     >
       {isCopied ? 'Ready to paste!' : 'Copy message'}
       {isCopied ? <CopyFilled /> : <CopyOutlined />}
@@ -50,9 +50,9 @@ const CopyButton = styled(Button)`
   &.ant-btn-default {
     font-size: 1rem;
     border-radius: 5rem;
-    height: 3.25rem;
-    background-color: #282828;
-    color: #ffffff;
-    border: none;
+    border: solid 1px #282828;
+    height: 3rem;
+    background-color: #f9f9f9;
+    color: #282828;
   }
 `;

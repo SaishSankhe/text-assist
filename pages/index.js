@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import CopyToClipboard from '@/components/CopyToClipboard';
 import styled from 'styled-components';
 import { Montserrat } from 'next/font/google';
@@ -34,6 +34,8 @@ export default function Home() {
   const [style, setStyle] = useState('casual');
   const [emoticon, setEmoticon] = useState(false);
   const [length, setLength] = useState('normal');
+
+  const inputRef = useRef(null);
 
   // drawer
   const [open, setOpen] = useState(false);
@@ -168,15 +170,6 @@ export default function Home() {
           <div className="fixed-container-bottom fixed bottom-0 w-full left-0 right-0 px-4 flex flex-col items-center">
             {result.message && <CopyToClipboard copyText={result.message} />}
 
-            <FullWidthButtonSpaceBetween
-              type="default"
-              onClick={openDrawer}
-              size="large"
-            >
-              Advanced options
-              <PlusCircleOutlined />
-            </FullWidthButtonSpaceBetween>
-
             <CustomDrawer
               title="Advanced options"
               placement="bottom"
@@ -185,14 +178,19 @@ export default function Home() {
               open={open}
               keyboard={true}
               footer={
-                <Button type="default" size="large" onClick={closeDrawer}>
+                <Button
+                  type="default"
+                  size="large"
+                  onClick={closeDrawer}
+                  className="mr-3"
+                >
                   Apply
                 </Button>
               }
               height={'auto'}
-              className="mb-6 mx-6 pb-4"
+              className="mb-4 mx-4 pb-4"
             >
-              <Form layout="vertical" form={form}>
+              <Form layout="vertical">
                 <Form.Item label="Tone of the message">
                   <Select
                     size="large"
@@ -209,6 +207,7 @@ export default function Home() {
                       { value: 'celebratory', label: 'Celebratory' },
                       { value: 'polite', label: 'Polite' },
                       { value: 'respectful', label: 'Respectful' },
+                      { value: 'motivational', label: 'Motivational' },
                     ]}
                   />
                 </Form.Item>
@@ -249,13 +248,14 @@ export default function Home() {
               </Form>
             </CustomDrawer>
 
-            <div className="form-card p-6 my-6 w-full">
+            <div className="form-card p-6 mt-4 mb-6 w-full">
               <Form
                 form={form}
                 name="form"
                 initialValues={{ remember: true }}
                 onFinish={onSubmit}
                 autoComplete="off"
+                layout="vertical"
               >
                 <Form.Item
                   name="prompt"
@@ -268,11 +268,13 @@ export default function Home() {
                 >
                   <CustomInput
                     placeholder="Generate message about..."
+                    name="prompt"
                     value={prompt}
                     type="text"
                     onChange={(e) => setPrompt(e.target.value)}
                     maxLength={128}
                     size="large"
+                    ref={inputRef}
                     suffix={
                       <CloseCircleOutlined
                         className={
@@ -280,12 +282,39 @@ export default function Home() {
                         }
                         onClick={() => {
                           setPrompt('');
-                          form.resetFields(['prompt']);
+                          form.setFieldsValue({ prompt: '' });
                         }}
                       />
                     }
                   />
                 </Form.Item>
+
+                <InputAttachedOptions className="p-4 mb-4">
+                  <Form.Item label="Tone of the message" className="mb-4">
+                    <Select
+                      defaultValue="Normal"
+                      onChange={onToneChange}
+                      options={[
+                        { value: 'normal', label: 'Normal' },
+                        { value: 'happy', label: 'Happy' },
+                        { value: 'sad', label: 'Sad' },
+                        { value: 'funny', label: 'Funny' },
+                        { value: 'romantic', label: 'Romantic' },
+                        { value: 'regretful', label: 'Regretful' },
+                        { value: 'sarcastic', label: 'Sarcastic' },
+                        { value: 'celebratory', label: 'Celebratory' },
+                        { value: 'polite', label: 'Polite' },
+                        { value: 'respectful', label: 'Respectful' },
+                        { value: 'motivational', label: 'Motivational' },
+                      ]}
+                    />
+                  </Form.Item>
+
+                  <SmallButtonSpaceBetween type="default" onClick={openDrawer}>
+                    More options
+                    <PlusCircleOutlined />
+                  </SmallButtonSpaceBetween>
+                </InputAttachedOptions>
 
                 <Form.Item className="mb-0">
                   <FullWidthButton
@@ -328,6 +357,15 @@ const CustomInput = styled(Input)`
   font-size: 1rem;
   height: 3.25rem;
   border: 1px solid #eaeaea;
+  border-radius: 0.5rem 0.5rem 0 0;
+`;
+
+const InputAttachedOptions = styled.div`
+  background-color: #fff;
+  border-radius: 0 0 0.5rem 0.5rem;
+  border: 1px solid #eaeaea;
+  border-top: none;
+  margin-top: -24px;
 `;
 
 const FullWidthButton = styled(Button)`
@@ -347,15 +385,19 @@ const FullWidthButton = styled(Button)`
   }
 `;
 
-const FullWidthButtonSpaceBetween = styled(FullWidthButton)`
+const SmallButtonSpaceBetween = styled(Button)`
+  min-width: 100%;
+  display: inline-flex;
+  align-items: center;
   justify-content: space-between;
   box-shadow: none;
 
   &.ant-btn-default {
-    border-radius: 5rem;
-    background-color: #f9f9f9;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+    border: solid 1px #eaeaea;
+    background-color: #efefef;
     color: #282828;
-    padding: 0 24px;
   }
 `;
 
