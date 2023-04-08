@@ -221,7 +221,7 @@ export default function Home() {
                   />
                 </Form.Item>
 
-                <LargerFontCheckbox onChange={() => setEmoticon(true)}>
+                <LargerFontCheckbox onChange={() => setEmoticon(!emoticon)}>
                   Include emojis
                 </LargerFontCheckbox>
               </Form>
