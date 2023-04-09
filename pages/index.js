@@ -168,7 +168,7 @@ export default function Home() {
           </div>
 
           <div className="fixed-container-bottom fixed bottom-0 w-full left-0 right-0 px-4 flex flex-col items-center">
-            {result.message && <CopyToClipboard copyText={result.message} />}
+            {isResult && <CopyToClipboard copyText={result.message} />}
 
             <CustomDrawer
               title="Advanced options"
