@@ -50,9 +50,9 @@ const CopyButton = styled(Button)`
   &.ant-btn-default {
     font-size: 1rem;
     border-radius: 5rem;
-    border: solid 1px #282828;
+    border: solid 1px #1d5a6e;
     height: 3rem;
-    background-color: #f9f9f9;
-    color: #282828;
+    background-color: #cae2e4;
+    color: #1d5a6e;
   }
 `;

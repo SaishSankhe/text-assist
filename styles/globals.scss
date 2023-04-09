@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #fffdf9;
+}
+
+h1 {
+  color: #1d5a6e;
+}
+
+.ant-input {
+  background-color: #fffdf9;
+  color: #1d5a6e;
+}
+
+.icon-hidden {
+  display: none;
+}
+
+.icon-show {
+  display: block;
+}
+
+section {
+  height: 60vh;
+  max-height: 60vh;
+}
+
+.form-card {
+  background-color: #cae2e4;
+  border-radius: 2rem;
+}
+
+.ant-form-item-explain-error {
+  font-size: 0.75rem;
+}
+
+.ant-form-item-label > label {
+  color: #1d5a6e !important;
+}
+
+label {
+  color: #1d5a6e !important;
+}
+
+.ant-checkbox-inner {
+  border-color: #1d5a6e !important;
+}
+
+.ant-radio-button-wrapper-checked:not(
+    .ant-radio-button-wrapper-disabled
+  ):first-child {
+  box-shadow: none !important;
+}
+
+.ant-radio-button-wrapper {
+  background-color: #fffdf9 !important;
+}
+
+.ant-radio-button-wrapper-checked {
+  border-color: #1d5a6e !important;
+}
+
+.ant-select-selector {
+  background-color: #fffdf9 !important;
+  color: #1d5a6e !important;
+  border: 1px solid #cae2e4 !important;
+}
+
+.ant-drawer-title,
+.ant-drawer-header,
+.ant-drawer-close {
+  color: #1d5a6e !important;
+}
+
+.ant-drawer-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.apply-btn {
+  background-color: #1d5a6e;
+  border: none;
+  color: #fffdf9;
+}

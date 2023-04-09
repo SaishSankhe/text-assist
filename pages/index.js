@@ -150,9 +150,9 @@ export default function Home() {
                 {result.message}
               </MessageCardDiv>
             ) : loading ? (
-              <MessageCardDiv className="message-container p-6">
+              <MessageCardDivSkeleton className="message-container p-6">
                 <Skeleton active={loading} title={false} />
-              </MessageCardDiv>
+              </MessageCardDivSkeleton>
             ) : isError ? (
               <ErrorMessageCardDiv className="message-container p-6">
                 Apologies! Something went wrong. Please try once again.
@@ -182,7 +182,7 @@ export default function Home() {
                   type="default"
                   size="large"
                   onClick={closeDrawer}
-                  className="mr-3"
+                  className="mr-3 apply-btn"
                 >
                   Apply
                 </Button>
@@ -323,12 +323,13 @@ export default function Home() {
 
 const MessageCardDiv = styled.div`
   border-radius: 2rem 2rem 0.1rem;
-  background-color: #efefef;
+  background-color: #ef6f6c;
+  color: #fffdf9;
 `;
 
 const NoMessageCardDiv = styled.div`
-  color: #979797;
-  border: dashed 3.5px #efefef;
+  color: #1d5a6e;
+  border: dashed 3.5px #ef6f6c;
   border-radius: 2rem 2rem 0.1rem;
 `;
 
@@ -340,16 +341,16 @@ const CustomInput = styled(Input)`
   border: none;
   font-size: 1rem;
   height: 3.25rem;
-  border: 1px solid #eaeaea;
+  background-color: #fffdf9;
+  border-bottom: 1px solid #cae2e4;
   border-radius: 0.5rem 0.5rem 0 0;
 `;
 
 const InputAttachedOptions = styled.div`
-  background-color: #fff;
+  background-color: #fffdf9;
   border-radius: 0 0 0.5rem 0.5rem;
-  border: 1px solid #eaeaea;
-  border-top: none;
   margin-top: -24px;
+  color: #1d5a6e;
 `;
 
 const FullWidthButton = styled(Button)`
@@ -363,8 +364,8 @@ const FullWidthButton = styled(Button)`
     font-size: 1rem;
     border-radius: 0.5rem;
     height: 3.25rem;
-    background-color: #282828;
-    color: #ffffff;
+    background-color: #1d5a6e;
+    color: #fffdf9;
     border: none;
   }
 `;
@@ -379,9 +380,9 @@ const SmallButtonSpaceBetween = styled(Button)`
   &.ant-btn-default {
     font-size: 0.85rem;
     border-radius: 0.5rem;
-    border: solid 1px #eaeaea;
-    background-color: #efefef;
-    color: #282828;
+    border: none;
+    background-color: #cae2e4;
+    color: #1d5a6e;
   }
 `;
 
@@ -390,9 +391,14 @@ const CustomDrawer = styled(Drawer)`
 
   &.ant-drawer-content {
     width: auto;
+    background-color: #fffdf9;
   }
 `;
 
 const LargerFontCheckbox = styled(Checkbox)`
   font-size: 1rem !important;
+`;
+
+const MessageCardDivSkeleton = styled(MessageCardDiv)`
+  background-color: #cae2e4;
 `;
