@@ -1,6 +1,6 @@
-import Head from 'next/head';
 import { useState, useRef } from 'react';
 import CopyToClipboard from '@/components/CopyToClipboard';
+import LinkPreview from '@/components/LinkPreview';
 import styled from 'styled-components';
 import { Montserrat } from 'next/font/google';
 
@@ -137,9 +137,9 @@ export default function Home() {
 
   return (
     <>
-      <Head>
+      <LinkPreview>
         <title>Text generator</title>
-      </Head>
+      </LinkPreview>
 
       <main className={montserrat.className}>
         <section className="p-4 flex flex-col overflow-scroll">
