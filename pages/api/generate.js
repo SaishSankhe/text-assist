@@ -5,7 +5,7 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-const useDaVinciModel = process.env.USE_DAVINCI_MODEL;
+const useDaVinciModel = parseInt(process.env.USE_DAVINCI_MODEL);
 
 const systemPrompt = `Assume you are very talented, extremely articulated and an eloquent writer. You specialize in writing day-to-day text messages for humans. Humans will come to you with a word or sentence as a prompt, and  your goal is to craft a message based on the user entered prompt.
 You must not reply to the prompt, but you must generate a message which conveys the same meaning as the prompt.
