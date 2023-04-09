@@ -29,10 +29,12 @@ export default async function (req, res) {
 
   let body;
 
-  if (useDaVinciModel) {
+  if (!!useDaVinciModel) {
+    console.log('Using da-vinci');
     // TEXT Da-Vinci
     body = await useDaVinci(systemPrompt, req.body);
   } else {
+    console.log('Using 3.5-turbo');
     // CHAT - GPT 3.5 Turbo
     body = await useGPT35Turbo(systemPrompt, req.body);
   }
@@ -46,7 +48,6 @@ export default async function (req, res) {
         result: JSON.parse(response.data.choices[0].text),
       });
     } else {
-      console.log('here');
       // CHAT - GPT 3.5 Turbo
       const response = await openai.createChatCompletion(body);
       console.log(JSON.parse(response.data.choices[0].message.content));
