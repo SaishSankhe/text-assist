@@ -15,7 +15,9 @@ export default function LinkPreview() {
         property="og:description"
         content="Generate text messages for any occassion, using Text Assist"
       />
-      <meta property="og:image" content={'preview.png'} />
+      <meta property="og:image:width" content="800" />
+      <meta property="og:image:height" content="400" />
+      <meta property="og:image" content={'preview.jpg'} />
       <meta property="og:image:alt" content="Text Assist app" />
     </Head>
   );
