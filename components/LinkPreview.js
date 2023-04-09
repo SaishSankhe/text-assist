@@ -9,11 +9,11 @@ export default function LinkPreview() {
       <meta property="og:title" content="Text Assist" />
       <meta
         name="twitter:card"
-        content="Generate text messages for any occassion, using Text Assist 😍 🥳 🎉"
+        content="Generate text messages for any situation, using Text Assist 😍 🥳 🎉"
       />
       <meta
         property="og:description"
-        content="Generate text messages for any occassion, using Text Assist 😍 🥳 🎉"
+        content="Generate text messages for any situation, using Text Assist 😍 🥳 🎉"
       />
       <meta property="og:image:width" content="800" />
       <meta property="og:image:height" content="400" />
