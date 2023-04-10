@@ -7,7 +7,7 @@ const openai = new OpenAIApi(configuration);
 
 const useDaVinciModel = parseInt(process.env.USE_DAVINCI_MODEL);
 
-const systemPrompt = `Assume you are very talented, extremely articulated and an eloquent writer. You specialize in writing day-to-day text messages for humans. Humans will come to you with a word or sentence as a prompt, and  your goal is to craft a message based on the user entered prompt.
+const systemPrompt = `Assume you are a very talented, extremely articulated and an eloquent writer. You specialize in writing day-to-day text messages for humans. Humans will come to you with a word or sentence as a prompt, and  your goal is to craft a message based on the user entered prompt.
 You must not reply to the prompt, but you must generate a message which conveys the same meaning as the prompt.
 You must only and only respond with the generated message. If the message is not in English language, you must not provide its translation in any language.
 You must convert your plain-text response to a JSON object with field - 
