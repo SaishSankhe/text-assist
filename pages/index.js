@@ -144,30 +144,180 @@ export default function Home() {
       <main className={montserrat.className}>
         <section className="p-4 flex flex-col overflow-scroll">
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
-          <div className="message-container flex flex-col flex-1 justify-center">
-            {isResult ? (
-              <MessageCardDiv className="message-container p-6">
-                {result.message}
-              </MessageCardDiv>
-            ) : loading ? (
-              <MessageCardDivSkeleton className="message-container p-6">
-                <Skeleton active={loading} title={false} />
-              </MessageCardDivSkeleton>
-            ) : isError ? (
-              <ErrorMessageCardDiv className="message-container p-6">
-                Apologies! Something went wrong. Please try once again.
-              </ErrorMessageCardDiv>
-            ) : (
-              <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">
-                No message genereated yet.
-                <br />
-                Try entering a prompt in the input box below and click on
-                generate.
-              </NoMessageCardDiv>
-            )}
+          <div className="content-container flex flex-1 flex-col min-h-full fixed bottom-0 w-full left-0 right-0 justify-between">
+            <div className="message-container flex flex-col my-auto px-4 justify-center">
+              {isResult ? (
+                <MessageCardDiv className="message-container p-6">
+                  {result.message}
+                </MessageCardDiv>
+              ) : loading ? (
+                <MessageCardDivSkeleton className="message-container p-6">
+                  <Skeleton active={loading} title={false} />
+                </MessageCardDivSkeleton>
+              ) : isError ? (
+                <ErrorMessageCardDiv className="message-container p-6">
+                  Apologies! Something went wrong. Please try once again.
+                </ErrorMessageCardDiv>
+              ) : (
+                <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">
+                  No message genereated yet.
+                  <br />
+                  Try entering a prompt in the input box below and click on
+                  generate.
+                </NoMessageCardDiv>
+              )}
+            </div>
+            <div className="fixed-container-bottom w-full px-4 my-6 flex flex-col items-center">
+              {isResult && <CopyToClipboard copyText={result.message} />}
+
+              <CustomDrawer
+                title="Advanced options"
+                placement="bottom"
+                closeIcon={<CloseCircleOutlined />}
+                onClose={closeDrawer}
+                open={open}
+                keyboard={true}
+                footer={
+                  <Button
+                    type="default"
+                    size="large"
+                    onClick={closeDrawer}
+                    className="mr-3 apply-btn"
+                  >
+                    Apply
+                  </Button>
+                }
+                height={'auto'}
+                className="mb-4 mx-4 pb-4"
+              >
+                <Form layout="vertical">
+                  <Form.Item label="Message language">
+                    <Radio.Group
+                      size="large"
+                      options={languageOptions}
+                      onChange={onLanguageChange}
+                      value={language}
+                      optionType="button"
+                    />
+                  </Form.Item>
+
+                  <Form.Item label="Message style">
+                    <Radio.Group
+                      size="large"
+                      options={styleOptions}
+                      onChange={onStyleChange}
+                      value={style}
+                      optionType="button"
+                    />
+                  </Form.Item>
+
+                  <Form.Item label="Message length">
+                    <Radio.Group
+                      size="large"
+                      options={lengthOptions}
+                      onChange={onLengthChange}
+                      value={length}
+                      optionType="button"
+                    />
+                  </Form.Item>
+
+                  <LargerFontCheckbox onChange={() => setEmoticon(!emoticon)}>
+                    Include emojis
+                  </LargerFontCheckbox>
+                </Form>
+              </CustomDrawer>
+
+              <div className="form-card p-6 mt-4 w-full">
+                <Form
+                  form={form}
+                  name="form"
+                  initialValues={{ remember: true }}
+                  onFinish={onSubmit}
+                  autoComplete="off"
+                  layout="vertical"
+                >
+                  <Form.Item
+                    name="prompt"
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please enter atleat one word as a prompt',
+                      },
+                    ]}
+                  >
+                    <CustomInput
+                      placeholder="Generate message about..."
+                      name="prompt"
+                      value={prompt}
+                      type="text"
+                      onChange={(e) => setPrompt(e.target.value)}
+                      maxLength={128}
+                      size="large"
+                      ref={inputRef}
+                      suffix={
+                        <CloseCircleOutlined
+                          className={
+                            prompt.length === 0 ? 'icon-hidden' : 'icon-show'
+                          }
+                          onClick={() => {
+                            setPrompt('');
+                            form.setFieldsValue({ prompt: '' });
+                          }}
+                        />
+                      }
+                    />
+                  </Form.Item>
+
+                  <InputAttachedOptions className="p-4 mb-4">
+                    <Form.Item label="Tone of the message" className="mb-4">
+                      <Select
+                        size="large"
+                        defaultValue="Normal"
+                        onChange={onToneChange}
+                        options={[
+                          { value: 'normal', label: 'Normal' },
+                          { value: 'happy', label: 'Happy' },
+                          { value: 'sad', label: 'Sad' },
+                          { value: 'funny', label: 'Funny' },
+                          { value: 'romantic', label: 'Romantic' },
+                          { value: 'regretful', label: 'Regretful' },
+                          { value: 'sarcastic', label: 'Sarcastic' },
+                          { value: 'celebratory', label: 'Celebratory' },
+                          { value: 'polite', label: 'Polite' },
+                          { value: 'respectful', label: 'Respectful' },
+                          { value: 'motivational', label: 'Motivational' },
+                        ]}
+                      />
+                    </Form.Item>
+
+                    <SmallButtonSpaceBetween
+                      size="large"
+                      type="default"
+                      onClick={openDrawer}
+                    >
+                      More options
+                      <PlusCircleOutlined />
+                    </SmallButtonSpaceBetween>
+                  </InputAttachedOptions>
+
+                  <Form.Item className="mb-0">
+                    <FullWidthButton
+                      type="default"
+                      htmlType="submit"
+                      loading={loading}
+                      disabled={loading}
+                      size="large"
+                    >
+                      {loading ? 'Generating' : 'Generate'}
+                      {loading ? <BulbFilled /> : <BulbOutlined />}
+                    </FullWidthButton>
+                  </Form.Item>
+                </Form>
+              </div>
+            </div>
           </div>
 
-          <div className="fixed-container-bottom fixed bottom-0 w-full left-0 right-0 px-4 flex flex-col items-center">
+          {/* <div className="fixed-container-bottom fixed bottom-0 w-full left-0 right-0 px-4 flex flex-col items-center">
             {isResult && <CopyToClipboard copyText={result.message} />}
 
             <CustomDrawer
@@ -314,7 +464,7 @@ export default function Home() {
                 </Form.Item>
               </Form>
             </div>
-          </div>
+          </div> */}
         </section>
       </main>
     </>

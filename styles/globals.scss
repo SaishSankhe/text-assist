@@ -24,8 +24,11 @@ h1 {
 }
 
 section {
-  height: 60vh;
-  max-height: 60vh;
+  // min-height: 98vh;
+}
+
+.content-container {
+  padding-top: 3rem;
 }
 
 .form-card {
@@ -78,6 +81,10 @@ label {
 .ant-drawer-footer {
   display: flex;
   justify-content: flex-end;
+}
+
+.ant-drawer-content-wrapper {
+  box-shadow: none !important;
 }
 
 .apply-btn {
