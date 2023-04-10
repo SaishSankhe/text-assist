@@ -43,7 +43,7 @@ export default async function (req, res) {
     if (useDaVinciModel) {
       // TEXT Da-Vinci
       const response = await openai.createCompletion(body);
-      console.log(`RESPONSE: ${response.data.choices[0].text}`);
+
       res.status(200).json({
         result: JSON.parse(response.data.choices[0].text),
       });
