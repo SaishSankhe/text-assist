@@ -142,9 +142,9 @@ export default function Home() {
       </LinkPreview>
 
       <main className={montserrat.className}>
-        <section className="p-4 flex flex-col overflow-scroll">
+        <section className="p-4 flex flex-col">
           <h1 className="text-xl font-bold text-center">Text Assist</h1>
-          <div className="content-container flex flex-1 flex-col min-h-full fixed bottom-0 w-full left-0 right-0 justify-between">
+          <div className="content-container flex flex-1 flex-col min-h-full w-full fixed bottom-0 left-0 right-0 justify-center mx-auto sm:w-3/4 lg:w-2/4 xl:w-2/5 xxl:w-1/4 max-w-xl">
             <div className="message-container flex flex-col my-auto px-4 justify-center">
               {isResult ? (
                 <MessageCardDiv className="message-container p-6">
@@ -188,7 +188,7 @@ export default function Home() {
                   </Button>
                 }
                 height={'auto'}
-                className="mb-4 mx-4 pb-4"
+                className="mb-4 mx-4 pb-4 sm:mx-auto max-w-2xl"
               >
                 <Form layout="vertical">
                   <Form.Item label="Message language">
