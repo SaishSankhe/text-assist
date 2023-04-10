@@ -50,7 +50,7 @@ export default async function (req, res) {
     } else {
       // CHAT - GPT 3.5 Turbo
       const response = await openai.createChatCompletion(body);
-      console.log(JSON.parse(response.data.choices[0].message.content));
+
       res.status(200).json({
         result: JSON.parse(response.data.choices[0].message.content),
       });
