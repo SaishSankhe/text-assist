@@ -51,6 +51,33 @@ export default function Home() {
     setOpen(false);
   };
 
+  const toneOptions = [
+    { value: 'normal', label: 'Normal' },
+    {
+      label: 'Positive',
+      options: [
+        { value: 'happy', label: 'Happy' },
+        { value: 'funny', label: 'Funny' },
+        { value: 'romantic', label: 'Romantic' },
+        { value: 'sarcastic', label: 'Sarcastic' },
+        { value: 'celebratory', label: 'Celebratory' },
+        { value: 'polite', label: 'Polite' },
+        { value: 'respectful', label: 'Respectful' },
+        { value: 'motivational', label: 'Motivational' },
+      ],
+    },
+    {
+      label: 'Negative',
+      options: [
+        { value: 'sad', label: 'Sad' },
+        { value: 'regretful', label: 'Regretful' },
+        { value: 'arrogant', label: 'Arrogant' },
+        { value: 'judgemental', label: 'Judgemental' },
+        { value: 'disappointed', label: 'Disappointed' },
+      ],
+    },
+  ];
+
   const languageOptions = [
     { value: 'english', label: 'English' },
     { value: 'hindi', label: 'Hindi' },
@@ -274,19 +301,7 @@ export default function Home() {
                         size="large"
                         defaultValue="Normal"
                         onChange={onToneChange}
-                        options={[
-                          { value: 'normal', label: 'Normal' },
-                          { value: 'happy', label: 'Happy' },
-                          { value: 'sad', label: 'Sad' },
-                          { value: 'funny', label: 'Funny' },
-                          { value: 'romantic', label: 'Romantic' },
-                          { value: 'regretful', label: 'Regretful' },
-                          { value: 'sarcastic', label: 'Sarcastic' },
-                          { value: 'celebratory', label: 'Celebratory' },
-                          { value: 'polite', label: 'Polite' },
-                          { value: 'respectful', label: 'Respectful' },
-                          { value: 'motivational', label: 'Motivational' },
-                        ]}
+                        options={toneOptions}
                       />
                     </Form.Item>
 
