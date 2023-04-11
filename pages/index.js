@@ -272,10 +272,6 @@ export default function Home() {
                       },
                     ]}
                   >
-                    <label htmlFor="prompt" hidden>
-                      Enter your prompt
-                    </label>
-
                     <CustomInput
                       placeholder="Generate message about..."
                       name="prompt"
@@ -302,9 +298,6 @@ export default function Home() {
 
                   <InputAttachedOptions className="p-4 mb-4">
                     <Form.Item label="Tone of the message" className="mb-4">
-                      <label htmlFor="tone" hidden>
-                        Select tone of the message
-                      </label>
                       <Select
                         id="tone"
                         size="large"
