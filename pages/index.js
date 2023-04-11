@@ -178,9 +178,9 @@ export default function Home() {
                   {result.message}
                 </MessageCardDiv>
               ) : loading ? (
-                <MessageCardDivSkeleton className="message-container p-6">
+                <MessageCardDiv className="message-container p-6">
                   <Skeleton active={loading} title={false} />
-                </MessageCardDivSkeleton>
+                </MessageCardDiv>
               ) : isError ? (
                 <ErrorMessageCardDiv className="message-container p-6">
                   Apologies! Something went wrong. Please try once again.
@@ -198,7 +198,7 @@ export default function Home() {
               {isResult && <CopyToClipboard copyText={result.message} />}
 
               <CustomDrawer
-                title="Advanced options"
+                title="Message options"
                 placement="bottom"
                 closeIcon={<CloseCircleOutlined />}
                 onClose={closeDrawer}
@@ -272,9 +272,14 @@ export default function Home() {
                       },
                     ]}
                   >
+                    <label htmlFor="prompt" hidden>
+                      Enter your prompt
+                    </label>
+
                     <CustomInput
                       placeholder="Generate message about..."
                       name="prompt"
+                      id="prompt"
                       value={prompt}
                       type="text"
                       onChange={(e) => setPrompt(e.target.value)}
@@ -297,7 +302,11 @@ export default function Home() {
 
                   <InputAttachedOptions className="p-4 mb-4">
                     <Form.Item label="Tone of the message" className="mb-4">
+                      <label htmlFor="tone" hidden>
+                        Select tone of the message
+                      </label>
                       <Select
+                        id="tone"
                         size="large"
                         defaultValue="Normal"
                         onChange={onToneChange}
@@ -488,8 +497,10 @@ export default function Home() {
 
 const MessageCardDiv = styled.div`
   border-radius: 2rem 2rem 0.1rem;
-  background-color: #ef6f6c;
-  color: #fffdf9;
+  background-color: #b4e4c4;
+  color: #1d5a6e;
+  font-weight: 500;
+  line-height: 1.6rem;
 `;
 
 const NoMessageCardDiv = styled.div`
@@ -562,8 +573,4 @@ const CustomDrawer = styled(Drawer)`
 
 const LargerFontCheckbox = styled(Checkbox)`
   font-size: 1rem !important;
-`;
-
-const MessageCardDivSkeleton = styled(MessageCardDiv)`
-  background-color: #cae2e4;
 `;
