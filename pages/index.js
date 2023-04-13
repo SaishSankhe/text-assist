@@ -203,67 +203,9 @@ export default function Home() {
                   </NoMessageCardDiv>
                 )}
               </div>
-              <div className="fixed-container-bottom w-full px-4 my-6 flex flex-col items-center">
+              <div className="fixed-container-bottom px-4 my-6 flex flex-col justify-center">
                 {isResult && <CopyToClipboard copyText={result.message} />}
-
-                <CustomDrawer
-                  title="Message options"
-                  placement="bottom"
-                  closeIcon={<CloseCircleOutlined />}
-                  onClose={closeDrawer}
-                  open={open}
-                  keyboard={true}
-                  footer={
-                    <Button
-                      type="primary"
-                      size="large"
-                      onClick={closeDrawer}
-                      className="mr-3 apply-btn border-none shadow-none"
-                    >
-                      Apply
-                    </Button>
-                  }
-                  height={'auto'}
-                  className="mb-4 mx-4 pb-4 sm:mx-auto max-w-2xl"
-                >
-                  <Form layout="vertical">
-                    <Form.Item label="Message language">
-                      <Radio.Group
-                        size="large"
-                        options={languageOptions}
-                        onChange={onLanguageChange}
-                        value={language}
-                        optionType="button"
-                      />
-                    </Form.Item>
-
-                    <Form.Item label="Message style">
-                      <Radio.Group
-                        size="large"
-                        options={styleOptions}
-                        onChange={onStyleChange}
-                        value={style}
-                        optionType="button"
-                      />
-                    </Form.Item>
-
-                    <Form.Item label="Message length">
-                      <Radio.Group
-                        size="large"
-                        options={lengthOptions}
-                        onChange={onLengthChange}
-                        value={length}
-                        optionType="button"
-                      />
-                    </Form.Item>
-
-                    <LargerFontCheckbox onChange={() => setEmoticon(!emoticon)}>
-                      Include emojis
-                    </LargerFontCheckbox>
-                  </Form>
-                </CustomDrawer>
-
-                <div className="form-card p-6 mt-4 w-full">
+                <div className="form-card p-6 mt-4">
                   <Form
                     form={form}
                     name="form"
@@ -341,6 +283,63 @@ export default function Home() {
                   </Form>
                 </div>
               </div>
+
+              <CustomDrawer
+                title="Message options"
+                placement="bottom"
+                closeIcon={<CloseCircleOutlined />}
+                onClose={closeDrawer}
+                open={open}
+                keyboard={true}
+                footer={
+                  <Button
+                    type="primary"
+                    size="large"
+                    onClick={closeDrawer}
+                    className="mr-3 apply-btn border-none shadow-none"
+                  >
+                    Apply
+                  </Button>
+                }
+                height={'auto'}
+                className="mb-4 mx-4 pb-4 sm:mx-auto max-w-2xl"
+              >
+                <Form layout="vertical">
+                  <Form.Item label="Message language">
+                    <Radio.Group
+                      size="large"
+                      options={languageOptions}
+                      onChange={onLanguageChange}
+                      value={language}
+                      optionType="button"
+                    />
+                  </Form.Item>
+
+                  <Form.Item label="Message style">
+                    <Radio.Group
+                      size="large"
+                      options={styleOptions}
+                      onChange={onStyleChange}
+                      value={style}
+                      optionType="button"
+                    />
+                  </Form.Item>
+
+                  <Form.Item label="Message length">
+                    <Radio.Group
+                      size="large"
+                      options={lengthOptions}
+                      onChange={onLengthChange}
+                      value={length}
+                      optionType="button"
+                    />
+                  </Form.Item>
+
+                  <LargerFontCheckbox onChange={() => setEmoticon(!emoticon)}>
+                    Include emojis
+                  </LargerFontCheckbox>
+                </Form>
+              </CustomDrawer>
             </div>
 
             {/* <div className="fixed-container-bottom fixed bottom-0 w-full left-0 right-0 px-4 flex flex-col items-center">
@@ -539,12 +538,18 @@ const FullWidthButton = styled(Button)`
   justify-content: center;
   box-shadow: none;
 
-  &.ant-btn-default {
+  &.ant-btn-primary {
     font-size: 1rem;
     border-radius: 0.5rem;
     height: 3.25rem;
     color: #fffdf9;
     border: none;
+
+    &:disabled {
+      background-color: #fffdf9;
+      border: 2px solid #1d5a6e;
+      color: #1d5a6e;
+    }
   }
 `;
 
