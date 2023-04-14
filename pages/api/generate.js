@@ -29,8 +29,9 @@ export default async function (req, res) {
 
   let body;
 
-  console.log(useDaVinciModel);
-  console.log(!!useDaVinciModel);
+  console.log(
+    `UseDavinciModel value: ${useDaVinciModel}, ${!!useDaVinciModel}`
+  );
 
   if (!!useDaVinciModel) {
     console.log('Using da-vinci');
