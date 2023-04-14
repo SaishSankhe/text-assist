@@ -29,6 +29,7 @@ export default async function (req, res) {
 
   let body;
 
+  console.log(useDaVinciModel);
   console.log(!!useDaVinciModel);
 
   if (!!useDaVinciModel) {
