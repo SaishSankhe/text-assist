@@ -177,113 +177,116 @@ export default function Home() {
           },
         }}
       >
-        <main className={montserrat.className}>
-          <section className="p-4 flex flex-col">
-            <h1 className="text-xl font-bold text-center">Text Assist</h1>
-            <div className="content-container flex flex-1 flex-col min-h-full w-full fixed bottom-0 left-0 right-0 justify-center mx-auto sm:w-3/4 lg:w-2/4 xl:w-2/5 xxl:w-1/4 max-w-xl">
-              <div className="message-container flex flex-col my-auto px-4 justify-center">
-                {isResult ? (
-                  <MessageCardDiv className="message-container p-6">
-                    {result.message}
-                  </MessageCardDiv>
-                ) : loading ? (
-                  <MessageCardDiv className="message-container p-6">
-                    <Skeleton active={loading} title={false} />
-                  </MessageCardDiv>
-                ) : isError ? (
-                  <ErrorMessageCardDiv className="message-container p-6">
-                    Apologies! Something went wrong. Please try once again.
-                  </ErrorMessageCardDiv>
-                ) : (
-                  <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">
-                    No message genereated yet.
-                    <br />
-                    Try entering a prompt in the input box below and click on
-                    generate.
-                  </NoMessageCardDiv>
-                )}
-              </div>
-              <div className="fixed-container-bottom px-4 my-6 flex flex-col justify-center">
-                {isResult && <CopyToClipboard copyText={result.message} />}
-                <div className="form-card p-6 mt-4">
-                  <Form
-                    form={form}
-                    name="form"
-                    initialValues={{ remember: true }}
-                    onFinish={onSubmit}
-                    autoComplete="off"
-                    layout="vertical"
-                  >
-                    <Form.Item
-                      name="prompt"
-                      rules={[
-                        {
-                          required: true,
-                          message: 'Please enter atleat one word as a prompt',
-                        },
-                      ]}
+        <>
+          <main className={montserrat.className}>
+            <section className="flex flex-col">
+              <h1 className="text-xl font-bold text-center">Text Assist</h1>
+              <div className="content-container flex flex-1 flex-col min-h-full w-full fixed bottom-0 left-0 right-0 justify-center mx-auto sm:w-3/4 lg:w-2/4 xl:w-2/5 xxl:w-1/4 max-w-xl">
+                <div className="message-container flex flex-col my-auto px-4 justify-center">
+                  {isResult ? (
+                    <MessageCardDiv className="message-container p-6">
+                      {result.message}
+                    </MessageCardDiv>
+                  ) : loading ? (
+                    <MessageCardDiv className="message-container p-6">
+                      <Skeleton active={loading} title={false} />
+                    </MessageCardDiv>
+                  ) : isError ? (
+                    <ErrorMessageCardDiv className="message-container p-6">
+                      Apologies! Something went wrong. Please try once again.
+                    </ErrorMessageCardDiv>
+                  ) : (
+                    <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">
+                      No message genereated yet.
+                      <br />
+                      Try entering a prompt in the input box below and click on
+                      generate.
+                    </NoMessageCardDiv>
+                  )}
+                </div>
+                <div className="fixed-container-bottom px-4 mb-6 flex flex-col justify-center">
+                  {isResult && <CopyToClipboard copyText={result.message} />}
+                  <div className="form-card p-6">
+                    <Form
+                      form={form}
+                      name="form"
+                      initialValues={{ remember: true }}
+                      onFinish={onSubmit}
+                      autoComplete="off"
+                      layout="vertical"
                     >
-                      <CustomInput
-                        placeholder="Generate message about..."
+                      <Form.Item
                         name="prompt"
-                        id="prompt"
-                        value={prompt}
-                        type="text"
-                        onChange={(e) => setPrompt(e.target.value)}
-                        maxLength={128}
-                        size="large"
-                        ref={inputRef}
-                        suffix={
-                          <CloseCircleOutlined
-                            className={
-                              prompt.length === 0 ? 'icon-hidden' : 'icon-show'
-                            }
-                            onClick={() => {
-                              setPrompt('');
-                              form.setFieldsValue({ prompt: '' });
-                            }}
-                          />
-                        }
-                      />
-                    </Form.Item>
-
-                    <InputAttachedOptions className="p-4 mb-4">
-                      <Form.Item label="Tone of the message" className="mb-4">
-                        <Select
-                          id="tone"
+                        rules={[
+                          {
+                            required: true,
+                            message: 'Please enter atleat one word as a prompt',
+                          },
+                        ]}
+                      >
+                        <CustomInput
+                          placeholder="Generate message about..."
+                          name="prompt"
+                          id="prompt"
+                          value={prompt}
+                          type="text"
+                          onChange={(e) => setPrompt(e.target.value)}
+                          maxLength={128}
                           size="large"
-                          defaultValue="Normal"
-                          onChange={onToneChange}
-                          options={toneOptions}
+                          ref={inputRef}
+                          suffix={
+                            <CloseCircleOutlined
+                              className={
+                                prompt.length === 0
+                                  ? 'icon-hidden'
+                                  : 'icon-show'
+                              }
+                              onClick={() => {
+                                setPrompt('');
+                                form.setFieldsValue({ prompt: '' });
+                              }}
+                            />
+                          }
                         />
                       </Form.Item>
 
-                      <SmallButtonSpaceBetween
-                        size="large"
-                        type="default"
-                        onClick={openDrawer}
-                      >
-                        More options
-                        <PlusCircleOutlined />
-                      </SmallButtonSpaceBetween>
-                    </InputAttachedOptions>
+                      <InputAttachedOptions className="p-4 mb-4">
+                        <Form.Item label="Tone of the message" className="mb-4">
+                          <Select
+                            id="tone"
+                            size="large"
+                            defaultValue="Normal"
+                            onChange={onToneChange}
+                            options={toneOptions}
+                          />
+                        </Form.Item>
 
-                    <Form.Item className="mb-0">
-                      <FullWidthButton
-                        type="primary"
-                        htmlType="submit"
-                        loading={loading}
-                        disabled={loading}
-                        size="large"
-                      >
-                        {loading ? 'Generating' : 'Generate'}
-                        {loading ? <BulbFilled /> : <BulbOutlined />}
-                      </FullWidthButton>
-                    </Form.Item>
-                  </Form>
+                        <SmallButtonSpaceBetween
+                          size="large"
+                          type="default"
+                          onClick={openDrawer}
+                        >
+                          More options
+                          <PlusCircleOutlined />
+                        </SmallButtonSpaceBetween>
+                      </InputAttachedOptions>
+
+                      <Form.Item className="mb-0">
+                        <FullWidthButton
+                          type="primary"
+                          htmlType="submit"
+                          loading={loading}
+                          disabled={loading}
+                          size="large"
+                        >
+                          {loading ? 'Generating' : 'Generate'}
+                          {loading ? <BulbFilled /> : <BulbOutlined />}
+                        </FullWidthButton>
+                      </Form.Item>
+                    </Form>
+                  </div>
                 </div>
               </div>
-
               <CustomDrawer
                 title="Message options"
                 placement="bottom"
@@ -340,158 +343,9 @@ export default function Home() {
                   </LargerFontCheckbox>
                 </Form>
               </CustomDrawer>
-            </div>
-
-            {/* <div className="fixed-container-bottom fixed bottom-0 w-full left-0 right-0 px-4 flex flex-col items-center">
-            {isResult && <CopyToClipboard copyText={result.message} />}
-
-            <CustomDrawer
-              title="Advanced options"
-              placement="bottom"
-              closeIcon={<CloseCircleOutlined />}
-              onClose={closeDrawer}
-              open={open}
-              keyboard={true}
-              footer={
-                <Button
-                  type="default"
-                  size="large"
-                  onClick={closeDrawer}
-                  className="mr-3 apply-btn"
-                >
-                  Apply
-                </Button>
-              }
-              height={'auto'}
-              className="mb-4 mx-4 pb-4"
-            >
-              <Form layout="vertical">
-                <Form.Item label="Message language">
-                  <Radio.Group
-                    size="large"
-                    options={languageOptions}
-                    onChange={onLanguageChange}
-                    value={language}
-                    optionType="button"
-                  />
-                </Form.Item>
-
-                <Form.Item label="Message style">
-                  <Radio.Group
-                    size="large"
-                    options={styleOptions}
-                    onChange={onStyleChange}
-                    value={style}
-                    optionType="button"
-                  />
-                </Form.Item>
-
-                <Form.Item label="Message length">
-                  <Radio.Group
-                    size="large"
-                    options={lengthOptions}
-                    onChange={onLengthChange}
-                    value={length}
-                    optionType="button"
-                  />
-                </Form.Item>
-
-                <LargerFontCheckbox onChange={() => setEmoticon(!emoticon)}>
-                  Include emojis
-                </LargerFontCheckbox>
-              </Form>
-            </CustomDrawer>
-
-            <div className="form-card p-6 mt-4 mb-6 w-full">
-              <Form
-                form={form}
-                name="form"
-                initialValues={{ remember: true }}
-                onFinish={onSubmit}
-                autoComplete="off"
-                layout="vertical"
-              >
-                <Form.Item
-                  name="prompt"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please enter atleat one word as a prompt',
-                    },
-                  ]}
-                >
-                  <CustomInput
-                    placeholder="Generate message about..."
-                    name="prompt"
-                    value={prompt}
-                    type="text"
-                    onChange={(e) => setPrompt(e.target.value)}
-                    maxLength={128}
-                    size="large"
-                    ref={inputRef}
-                    suffix={
-                      <CloseCircleOutlined
-                        className={
-                          prompt.length === 0 ? 'icon-hidden' : 'icon-show'
-                        }
-                        onClick={() => {
-                          setPrompt('');
-                          form.setFieldsValue({ prompt: '' });
-                        }}
-                      />
-                    }
-                  />
-                </Form.Item>
-
-                <InputAttachedOptions className="p-4 mb-4">
-                  <Form.Item label="Tone of the message" className="mb-4">
-                    <Select
-                      size="large"
-                      defaultValue="Normal"
-                      onChange={onToneChange}
-                      options={[
-                        { value: 'normal', label: 'Normal' },
-                        { value: 'happy', label: 'Happy' },
-                        { value: 'sad', label: 'Sad' },
-                        { value: 'funny', label: 'Funny' },
-                        { value: 'romantic', label: 'Romantic' },
-                        { value: 'regretful', label: 'Regretful' },
-                        { value: 'sarcastic', label: 'Sarcastic' },
-                        { value: 'celebratory', label: 'Celebratory' },
-                        { value: 'polite', label: 'Polite' },
-                        { value: 'respectful', label: 'Respectful' },
-                        { value: 'motivational', label: 'Motivational' },
-                      ]}
-                    />
-                  </Form.Item>
-
-                  <SmallButtonSpaceBetween
-                    size="large"
-                    type="default"
-                    onClick={openDrawer}
-                  >
-                    More options
-                    <PlusCircleOutlined />
-                  </SmallButtonSpaceBetween>
-                </InputAttachedOptions>
-
-                <Form.Item className="mb-0">
-                  <FullWidthButton
-                    type="default"
-                    htmlType="submit"
-                    loading={loading}
-                    disabled={loading}
-                    size="large"
-                  >
-                    {loading ? 'Generating' : 'Generate'}
-                    {loading ? <BulbFilled /> : <BulbOutlined />}
-                  </FullWidthButton>
-                </Form.Item>
-              </Form>
-            </div>
-          </div> */}
-          </section>
-        </main>
+            </section>
+          </main>
+        </>
       </ConfigProvider>
     </>
   );
