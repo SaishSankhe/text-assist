@@ -1,7 +1,9 @@
 import { Configuration, OpenAIApi } from 'openai';
 
+let keySwitch = 1;
+
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY_1,
 });
 const openai = new OpenAIApi(configuration);
 
@@ -17,6 +19,14 @@ You must convert the plain-text error message response to a JSON object with fie
 "error": string with the error message`;
 
 export default async function (req, res) {
+  if (keySwitch === 1) {
+    configuration.apiKey = process.env.OPENAI_API_KEY_1;
+    keySwitch = 2;
+  } else {
+    configuration.apiKey = process.env.OPENAI_API_KEY_2;
+    keySwitch = 1;
+  }
+
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -29,9 +39,13 @@ export default async function (req, res) {
 
   let body;
 
-  console.log(
-    `UseDavinciModel value: ${useDaVinciModel}, ${!!useDaVinciModel}`
-  );
+  const logger = {
+    isDavinciModel: useDaVinciModel,
+    '!!useDavinciModel': !!useDaVinciModel,
+    keySwitch: keySwitch,
+  };
+
+  console.table(logger);
 
   if (!!useDaVinciModel) {
     console.log('Using da-vinci');
