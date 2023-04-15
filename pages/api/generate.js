@@ -19,12 +19,19 @@ You must convert the plain-text error message response to a JSON object with fie
 "error": string with the error message`;
 
 export default async function (req, res) {
-  if (keySwitch === 1) {
-    configuration.apiKey = process.env.OPENAI_API_KEY_1;
-    keySwitch = 2;
-  } else {
-    configuration.apiKey = process.env.OPENAI_API_KEY_2;
-    keySwitch = 1;
+  switch (keySwitch) {
+    case 1:
+      configuration.apiKey = process.env.OPENAI_API_KEY_1;
+      keySwitch = 2;
+      break;
+    case 2:
+      configuration.apiKey = process.env.OPENAI_API_KEY_2;
+      keySwitch = 3;
+      break;
+    case 3:
+      configuration.apiKey = process.env.OPENAI_API_KEY_3;
+      keySwitch = 1;
+      break;
   }
 
   if (!configuration.apiKey) {
