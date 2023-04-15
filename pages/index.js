@@ -197,7 +197,7 @@ export default function Home() {
                     </ErrorMessageCardDiv>
                   ) : (
                     <NoMessageCardDiv className="message-container border border-dashed border-1 border-red-500 p-6">
-                      No message genereated yet.
+                      No message generated yet.
                       <br />
                       Try entering a prompt in the input box below and click on
                       generate.
@@ -220,7 +220,7 @@ export default function Home() {
                         rules={[
                           {
                             required: true,
-                            message: 'Please enter atleat one word as a prompt',
+                            message: 'Please enter atleast one word as a prompt',
                           },
                         ]}
                       >
