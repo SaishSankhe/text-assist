@@ -206,6 +206,13 @@ export default function Home() {
                 </div>
                 <div className="fixed-container-bottom px-4 mb-6 flex flex-col justify-center">
                   {isResult && <CopyToClipboard copyText={result.message} />}
+                  <ArrowSpan className="arrow">
+                    <img
+                      src="/arrow.png"
+                      alt="arrow pointing towards input box"
+                      hidden={isResult}
+                    />
+                  </ArrowSpan>
                   <div className="form-card p-6">
                     <Form
                       form={form}
@@ -220,12 +227,13 @@ export default function Home() {
                         rules={[
                           {
                             required: true,
-                            message: 'Please enter atleast one word as a prompt',
+                            message:
+                              'Please enter atleast one word as a prompt',
                           },
                         ]}
                       >
                         <CustomInput
-                          placeholder="Generate message about..."
+                          placeholder="Type your prompt here..."
                           name="prompt"
                           id="prompt"
                           value={prompt}
@@ -361,7 +369,7 @@ const MessageCardDiv = styled.div`
 
 const NoMessageCardDiv = styled.div`
   color: #1d5a6e;
-  border: dashed 3.5px #ef6f6c;
+  border: dashed 1.5px rgba(239, 111, 108, 0.5);
   border-radius: 2rem 2rem 0.1rem;
 `;
 
@@ -372,10 +380,15 @@ const ErrorMessageCardDiv = styled(NoMessageCardDiv)`
 const CustomInput = styled(Input)`
   border: none;
   font-size: 1rem;
-  height: 3.25rem;
+  height: 4rem;
   background-color: #fffdf9;
   border-bottom: 1px solid #cae2e4;
   border-radius: 0.5rem 0.5rem 0 0;
+  text-wrap: ;
+`;
+
+const ArrowSpan = styled.span`
+  margin-left: 2rem;
 `;
 
 const InputAttachedOptions = styled.div`
