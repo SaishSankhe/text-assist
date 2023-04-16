@@ -369,7 +369,7 @@ const MessageCardDiv = styled.div`
 
 const NoMessageCardDiv = styled.div`
   color: #1d5a6e;
-  border: dashed 1.5px rgba(239, 111, 108, 0.5);
+  border: dashed 2px rgba(239, 111, 108, 0.4);
   border-radius: 2rem 2rem 0.1rem;
 `;
 
