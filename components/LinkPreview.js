@@ -3,7 +3,6 @@ import Head from 'next/head';
 export default function LinkPreview() {
   return (
     <Head>
-      <title>Text Assist</title>
       <meta property="og:url" content="text-assist.vercel.app/" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="Text Assist" />

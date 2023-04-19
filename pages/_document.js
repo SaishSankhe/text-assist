@@ -4,7 +4,9 @@ import LinkPreview from '@/components/LinkPreview';
 export default function Document() {
   return (
     <Html lang="en">
-      <Head />
+      <Head>
+        <title>Text Assist</title>
+      </Head>
       <LinkPreview />
       <body>
         <Main />
