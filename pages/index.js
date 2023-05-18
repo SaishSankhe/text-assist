@@ -21,7 +21,6 @@ import {
   Radio,
   ConfigProvider,
 } from 'antd';
-
 import {
   CloseCircleOutlined,
   BulbOutlined,
@@ -43,13 +42,12 @@ export default function Home() {
   const [emoticon, setEmoticon] = useState(false);
   const [length, setLength] = useState('normal');
 
+  // form
+  const [form] = Form.useForm();
   const inputRef = useRef(null);
 
   // drawer
   const [open, setOpen] = useState(false);
-
-  // form
-  const [form] = Form.useForm();
 
   const openDrawer = () => {
     setOpen(true);
