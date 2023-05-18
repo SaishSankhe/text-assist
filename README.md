@@ -18,7 +18,7 @@ Text assist is an application that can generate messages for the user-provided p
 ## Screenshots
 
 ![Homepage - no prompt provided](public/preview-1.png)
-![Message generated](public/preview-2.png)
+![Message generated with copy button](public/preview-2.png)
 ![Message options](public/preview-3.png)
 
 ## Technologies
