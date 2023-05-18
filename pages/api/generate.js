@@ -28,10 +28,10 @@ export default async function (req, res) {
       configuration.apiKey = process.env.OPENAI_API_KEY_2;
       keySwitch = 3;
       break;
-    case 3:
-      configuration.apiKey = process.env.OPENAI_API_KEY_3;
-      keySwitch = 1;
-      break;
+    // case 3:
+    //   configuration.apiKey = process.env.OPENAI_API_KEY_3;
+    //   keySwitch = 1;
+    //   break;
   }
 
   if (!configuration.apiKey) {
