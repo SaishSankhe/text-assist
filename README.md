@@ -26,7 +26,9 @@ Text assist is an application that can generate messages for the user-provided p
 - [Next.js](https://nextjs.org/)
 - [OpenAI API](https://platform.openai.com/overview)
 - [Ant Design](https://ant.design/)
+- [Tailwind](https://tailwindcss.com/)
 - [Styled components](https://styled-components.com/)
+
 
 ## Setup
 
