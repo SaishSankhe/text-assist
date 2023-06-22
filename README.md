@@ -13,7 +13,7 @@ Try out the application at [text-assist.vercel.app](https://text-assist.vercel.a
 
 ## About The App
 
-Text assist is an application that can generate messages for the user-provided prompt. It uses AI ([OpenAI](https://openai.com/)) to generate the message. User can also adjust options such as tone of the message, language, style (casual, semi-formal, formal), length and whether to include emojis or not. After a message is generated, user can copy the message with single click and is ready to paste anywhere.
+Text assist is an application that can generate messages for the user-provided prompt. It uses AI ([OpenAI](https://openai.com/)) to generate the message. Users can also adjust options such as the tone of the message, language, style (casual, semi-formal, formal), length and whether to include emojis or not. After a message is generated, the user can copy the message with a single click and is ready to paste it anywhere.
 
 ## Screenshots
 
@@ -26,7 +26,7 @@ Text assist is an application that can generate messages for the user-provided p
 - [Next.js](https://nextjs.org/)
 - [OpenAI API](https://platform.openai.com/overview)
 - [Ant Design](https://ant.design/)
-- [Tailwind](https://tailwindcss.com/)
+- [TailwindCSS](https://tailwindcss.com/)
 - [Styled components](https://styled-components.com/)
 
 
