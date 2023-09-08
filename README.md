@@ -1,4 +1,5 @@
 # Text Assist
+Let AI generate the text messages for you!
 
 ## Demo link:
 
@@ -6,7 +7,7 @@ Try out the application at [text-assist.vercel.app](https://text-assist.vercel.a
 
 ### Important note
 
-As this project is intended as a side project and a learning experience, it uses free-tier OpenAI API, which might cause the application to display an error state page and not generate the intended message.
+As this project is intended as a side project and a learning experience, it uses free-tier OpenAI API, which might cause the application to display an error state page and not generate the intended message. Apologies in advance.
 
 ## Table of Content:
 
